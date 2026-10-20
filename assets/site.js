@@ -47,7 +47,7 @@
   window.addEventListener('pageshow', wake);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) wake(); });
 
-  // The 3D models: the row turns one tile every 3 seconds, round and round,
+  // The 3D models: the row turns one tile every 2 seconds, round and round,
   // the current tile in the middle with its neighbours showing either side
   // (Jay, 2026-10-20: "start in the middle so that there's models on the
   // left and right, feeling like an endless loop"). The last tiles are
@@ -81,7 +81,7 @@
         setTimeout(function () { at -= count; place(false); jumping = false; }, 720);
       }
     }
-    function start() { if (!running) { running = true; timer = setInterval(step, 3000); } }
+    function start() { if (!running) { running = true; timer = setInterval(step, 2000); } }
     function stop() { running = false; clearInterval(timer); }
     place(false);
     // Watched on its window, not the track: the track is many screens wide,

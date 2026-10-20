@@ -171,10 +171,12 @@ section.alt { background: var(--band); }
 
 /* Three cards across */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
-.card { background: var(--card); border-radius: var(--radius); padding: 30px 28px 32px; min-width: 0; }
-.card svg { width: 44px; height: 44px; padding: 10px; border-radius: 12px; background: rgba(0, 122, 255, 0.1); fill: none; stroke: var(--blue); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 18px; }
-.card h3 { margin-bottom: 10px; }
-.card p { color: var(--fg-2); font-size: 1rem; }
+/* The title beside its icon, the words under both (Jay, 2026-10-20: "move
+   that next to the icons for all of them"). */
+.card { background: var(--card); border-radius: var(--radius); padding: 28px 28px 30px; min-width: 0; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; }
+.card svg { width: 44px; height: 44px; padding: 10px; border-radius: 12px; background: rgba(0, 122, 255, 0.1); fill: none; stroke: var(--blue); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { margin: 0; }
+.card p { grid-column: 1 / -1; margin-top: 14px; color: var(--fg-2); font-size: 1rem; }
 
 /* The panel: one PDF, its sheets fanned */
 .ink { background: var(--panel); border-radius: var(--radius); padding: clamp(32px, 5vw, 64px); overflow: hidden; margin-bottom: 44px; }
@@ -208,9 +210,12 @@ section.alt { background: var(--band); }
 mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; border-radius: 3px; }
 
 /* The 3D models, on the app's blue: a row of tiles that turns one tile
-   every 3 seconds, round and round (Jay, 2026-10-20: "rotate through them
-   all one per every 3 seconds … like an infinite loop"). Three show on a
-   desk, one and a bit on a phone; Reduce Motion gets a row to scroll. */
+   every 2 seconds, round and round (Jay, 2026-10-20: "rotate through them
+   all … like an infinite loop", then "make them cycle faster"). Three show
+   on a desk, one and a bit on a phone; Reduce Motion gets a row to scroll.
+   No captions, and the tiles stand a little taller in their place; no
+   shadow, which the window clipped into a line under the row (Jay: "remove
+   the text underneath and there's a small line remove it"). */
 .models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 48px) 0; box-shadow: var(--shadow); overflow: hidden; }
 .models .head { margin-bottom: 28px; padding-left: 20px; padding-right: 20px; }
 .models h2 { color: #fff; }
@@ -220,13 +225,11 @@ mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; bor
 .models .track { display: flex; gap: var(--gap); --gap: clamp(12px, 2vw, 24px); --cols: 3.4; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
 .models .track.jump { transition: none; }
 .models figure { flex: none; width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); display: flex; flex-direction: column; min-width: 0; }
-.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; overflow: hidden; }
+.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 9 / 10; overflow: hidden; box-shadow: none; }
 .models .sheet img { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; object-position: center; margin: auto; }
-.models figcaption { color: rgba(255, 255, 255, 0.85); font-size: 0.9375rem; margin-top: 10px; text-align: center; }
 @media (max-width: 760px) {
   .models .window { padding: 0 20px; }
   .models .track { --cols: 1.4; }
-  .models figcaption { font-size: 0.875rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .models .window { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
