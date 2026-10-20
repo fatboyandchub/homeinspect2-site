@@ -204,15 +204,15 @@ mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; bor
 .models .lead { color: rgba(255, 255, 255, 0.85); }
 .models .eyebrow { color: rgba(255, 255, 255, 0.8); }
 .models .window { overflow: hidden; padding: 0 clamp(24px, 4vw, 48px); }
-.models .track { display: flex; gap: var(--gap); --gap: clamp(12px, 2vw, 24px); --cols: 3; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+.models .track { display: flex; gap: var(--gap); --gap: clamp(12px, 2vw, 24px); --cols: 3.4; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
 .models .track.jump { transition: none; }
 .models figure { flex: none; width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); display: flex; flex-direction: column; min-width: 0; }
-.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; }
-.models .sheet img { width: 100%; height: 100%; object-fit: contain; }
+.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; overflow: hidden; }
+.models .sheet img { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; object-position: center; margin: auto; }
 .models figcaption { color: rgba(255, 255, 255, 0.85); font-size: 0.9375rem; margin-top: 10px; text-align: center; }
 @media (max-width: 760px) {
   .models .window { padding: 0 20px; }
-  .models .track { --cols: 1.3; }
+  .models .track { --cols: 1.4; }
   .models figcaption { font-size: 0.875rem; }
 }
 @media (prefers-reduced-motion: reduce) {

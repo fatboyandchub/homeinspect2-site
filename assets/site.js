@@ -47,41 +47,48 @@
   window.addEventListener('pageshow', wake);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) wake(); });
 
-  // The 3D models: the row turns one tile every 3 seconds, round and round.
-  // The first tiles are cloned onto the end, so the turn past the last one
-  // lands on their copies and the row jumps back unseen.
+  // The 3D models: the row turns one tile every 3 seconds, round and round,
+  // the current tile in the middle with its neighbours showing either side
+  // (Jay, 2026-10-20: "start in the middle so that there's models on the
+  // left and right, feeling like an endless loop"). The last tiles are
+  // cloned in front and the first ones behind, so the turn past the last
+  // one lands on a copy and the row jumps back unseen.
   var track = document.querySelector('.models .track');
   if (track && !still.matches) {
     var tiles = Array.prototype.slice.call(track.children);
-    var count = tiles.length;
-    tiles.slice(0, 3).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-    var at = 0, running = false, timer = null;
+    var count = tiles.length, pad = 3;
+    tiles.slice(-pad).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.insertBefore(c, track.firstChild); });
+    tiles.slice(0, pad).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+    var at = pad, running = false, timer = null, jumping = false;
+    function place(animated) {
+      var tile = track.children[0], win = track.parentNode;
+      var width = tile.getBoundingClientRect().width;
+      var pitch = width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+      var x = (win.clientWidth - width) / 2 - at * pitch;
+      track.classList.toggle('jump', !animated);
+      track.style.transform = 'translateX(' + x + 'px)';
+      if (!animated) void track.offsetWidth;
+    }
     function step() {
-      var tile = track.children[0];
-      var pitch = tile.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+      if (jumping) return;
       at += 1;
-      track.classList.remove('jump');
-      track.style.transform = 'translateX(' + (-at * pitch) + 'px)';
-      if (at >= count) {
-        // Past the last tile, onto the clones: once the slide ends, snap back to the start without a transition.
-        setTimeout(function () {
-          track.classList.add('jump');
-          at = 0;
-          track.style.transform = 'translateX(0)';
-          // Force the jump to take before the next animated step.
-          void track.offsetWidth;
-        }, 720);
+      place(true);
+      if (at >= pad + count) {
+        // On the clone of the first tile: once the slide ends, snap back to the real one without a transition.
+        jumping = true;
+        setTimeout(function () { at -= count; place(false); jumping = false; }, 720);
       }
     }
     function start() { if (!running) { running = true; timer = setInterval(step, 3000); } }
     function stop() { running = false; clearInterval(timer); }
-    window.addEventListener('pageshow', function () { if (running) { stop(); start(); } });
+    place(false);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
       }, { threshold: 0.1 }).observe(track);
     } else { start(); }
-    window.addEventListener('resize', function () { track.classList.add('jump'); track.style.transform = 'translateX(0)'; at = 0; });
+    window.addEventListener('resize', function () { place(false); });
+    window.addEventListener('pageshow', function () { place(false); if (running) { stop(); start(); } });
   }
 
   var rises = Array.prototype.slice.call(document.querySelectorAll('.rise'));
