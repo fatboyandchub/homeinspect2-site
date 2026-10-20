@@ -10,8 +10,10 @@
   function base(v) { return '/assets/tips/' + v.getAttribute('data-pic'); }
   var videos = Array.prototype.slice.call(document.querySelectorAll('video[data-pic]'));
 
-  // The clip is fetched well before its card reaches the screen, so it can
-  // start the moment it does (Jay, 2026-10-20: "they need to load in faster").
+  // The clip is fetched well before its card reaches the screen and starts
+  // playing a whole screen before it shows, so it's well along or finished
+  // by the time it's looked at (Jay, 2026-10-20: "they need to load in
+  // faster", "start a project needs to be loaded in already").
   function fetch(v) {
     if (v.getAttribute('src')) return;
     v.preload = 'auto';
@@ -55,8 +57,8 @@
       fetch(v);
     })();
   }
-  if (document.readyState === 'complete') setTimeout(fetchRest, 800);
-  else window.addEventListener('load', function () { setTimeout(fetchRest, 800); });
+  if (document.readyState !== 'loading') setTimeout(fetchRest, 300);
+  else document.addEventListener('DOMContentLoaded', function () { setTimeout(fetchRest, 300); });
 
   var seen = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -67,7 +69,7 @@
       if (v) play(v);
       seen.unobserve(el);
     });
-  }, { rootMargin: '0px 0px 160px 0px', threshold: 0 });
+  }, { rootMargin: '0px 0px 100% 0px', threshold: 0 });
   rises.forEach(function (el) { seen.observe(el); });
   // A picture outside a rising block still plays on its own.
   videos.forEach(function (v) { if (!v.closest('.rise')) seen.observe(v); });

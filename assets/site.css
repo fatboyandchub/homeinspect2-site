@@ -43,7 +43,7 @@ a { color: var(--blue); text-decoration: none; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
 h1 { font-size: clamp(2.6rem, 7vw, 4.75rem); letter-spacing: -0.035em; }
-h2 { font-size: clamp(1.9rem, 4.6vw, 3rem); letter-spacing: -0.03em; }
+h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); letter-spacing: -0.03em; }
 h3 { font-size: 1.375rem; letter-spacing: -0.015em; }
 p { text-wrap: pretty; }
 .wrap {
@@ -73,10 +73,11 @@ p { text-wrap: pretty; }
 
 /* Sections */
 section { padding-block: clamp(40px, 7vw, 88px); scroll-margin-top: 64px; }
+@media (max-width: 760px) { section { padding-block: 28px; } }
 section.alt { background: var(--band); }
 .alt .step, .alt .tool, .alt .card, .alt .price { background: var(--card-on-2); }
 .head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
-.eyebrow { color: var(--blue-ink); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+.eyebrow { color: var(--blue-ink); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
 .lead { color: var(--fg-2); font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.45; margin-top: 18px; font-weight: 400; }
 
 /* The opening */
@@ -190,20 +191,28 @@ section.alt { background: var(--band); }
 .draft { background: rgba(255, 159, 10, 0.14); border: 1px solid rgba(255, 159, 10, 0.5); border-radius: 14px; padding: 12px 16px; margin: 0 0 28px; }
 mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; border-radius: 3px; }
 
-/* The 3D models, on the app's blue */
-.models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(28px, 4vw, 48px); box-shadow: var(--shadow); }
+/* The 3D models, on the app's blue: three tiles side by side (Jay,
+   2026-10-20: "side by side and not under each other"); a phone swipes
+   along the row. */
+.models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 48px); box-shadow: var(--shadow); }
 .models .head { margin-bottom: 28px; }
 .models h2 { color: #fff; }
 .models .lead { color: rgba(255, 255, 255, 0.85); }
 .models .eyebrow { color: rgba(255, 255, 255, 0.8); }
-.models .row { display: grid; grid-template-columns: 3fr 2fr; gap: clamp(12px, 2vw, 24px); align-items: stretch; }
-.models .sheet { padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; height: 100%; }
-.models .sheet img { width: 100%; height: auto; }
-.models .stack { display: grid; grid-template-rows: 1fr 1fr; gap: clamp(12px, 2vw, 24px); }
+.models .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 24px); align-items: stretch; }
 .models figure { display: flex; flex-direction: column; min-width: 0; }
-.models figure .sheet { flex: 1; }
+.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; }
+.models .sheet img { width: 100%; height: 100%; object-fit: contain; }
 .models figcaption { color: rgba(255, 255, 255, 0.85); font-size: 0.9375rem; margin-top: 10px; text-align: center; }
-@media (max-width: 760px) { .models .row { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .models { padding: 20px 0 24px; }
+  .models .head, .models .row { padding-left: 20px; padding-right: 20px; }
+  .models .row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+  .models .row::-webkit-scrollbar { display: none; }
+  .models figure { flex: none; width: 72%; scroll-snap-align: center; }
+  .models figure:last-child { margin-right: 20px; }
+  .models figcaption { font-size: 0.875rem; }
+}
 
 /* The foot */
 footer { border-top: 1px solid var(--line); padding-block: 28px 44px; color: var(--fg-2); font-size: 0.8125rem; }
