@@ -70,10 +70,10 @@ p { text-wrap: pretty; }
 @media (max-width: 760px) { .bar nav .more { display: none; } }
 
 /* Sections */
-section { padding-block: clamp(48px, 7vw, 96px); scroll-margin-top: 64px; }
+section { padding-block: clamp(40px, 7vw, 88px); scroll-margin-top: 64px; }
 section.alt { background: var(--bg-2); }
 .alt .step, .alt .tool, .alt .card, .alt .price { background: var(--card-on-2); }
-.head { max-width: 760px; margin: 0 auto 44px; text-align: center; }
+.head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
 .eyebrow { color: var(--blue-ink); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
 .lead { color: var(--fg-2); font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.45; margin-top: 18px; font-weight: 400; }
 
@@ -107,6 +107,7 @@ section.alt { background: var(--bg-2); }
 
 /* The four tools, as cards with their drawings */
 .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px; }
+@media (max-width: 760px) { .tools { grid-template-columns: 1fr 1fr; gap: 10px; } .tool { padding: 12px 12px 14px; border-radius: 16px; } .tool h3 { font-size: 1rem; } .tool p { font-size: 0.8125rem; } .tool .sheet { padding: 8px; } }
 .tool { background: var(--card); border-radius: 24px; padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--fg); }
 @media (hover: hover) { .tool:hover { text-decoration: none; } }
 .tool .sheet { padding: 12px; border-radius: 14px; box-shadow: var(--shadow-soft); margin-bottom: 10px; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -115,35 +116,39 @@ section.alt { background: var(--bg-2); }
 .tool p { color: var(--fg-2); font-size: 0.9375rem; }
 .tool .go { color: var(--blue-ink); font-weight: 600; font-size: 0.9375rem; margin-top: 4px; }
 
-/* The steps, like the app's How to Use pages */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 20px; }
-.step {
-  background: var(--card); border-radius: var(--radius); padding: 28px 28px 30px;
-  display: flex; flex-direction: column; gap: 10px; min-width: 0;
-}
-.step .n { color: var(--blue-ink); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
-.step h3 { margin-top: 2px; }
-.step .pic { margin: 8px auto 6px; width: 100%; max-width: 460px; }
-.step .pic video { width: 100%; border-radius: 14px; background: var(--card); aspect-ratio: 380 / 290; }
+/* The steps, like the app's How to Use pages: compact, three to a row on a
+   desk, two on a phone (Jay, 2026-10-20: "too much to scroll down … stack
+   more in each row"); the tips fold under each card. */
+.steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+.step { background: var(--card); border-radius: 20px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.step .n { color: var(--blue-ink); font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.step h3 { font-size: 1.0625rem; margin: 0; }
+.step .pic { margin: 4px 0; width: 100%; }
+.step .pic video { width: 100%; border-radius: 12px; background: var(--card); aspect-ratio: 380 / 290; }
 .step .pic.tall video { aspect-ratio: 380 / 370; }
-@media (max-width: 760px) { .step { padding: 22px 20px 24px; } }
-/* A chapter's first (and an even chapter's last) step lies wide: the picture beside the words. */
-@media (min-width: 900px) {
-  .step.wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 440px) 1fr; grid-template-rows: auto auto auto 1fr; column-gap: 44px; row-gap: 8px; align-items: start; grid-template-areas: "pic n" "pic h" "pic lead" "pic tips"; padding: 32px; }
-  .step.wide .pic { grid-area: pic; max-width: none; margin: 0; align-self: center; }
-  .step.wide .n { grid-area: n; } .step.wide h3 { grid-area: h; margin: 0; } .step.wide .lead { grid-area: lead; } .step.wide .tips { grid-area: tips; }
+.step .lead { font-size: 0.875rem; line-height: 1.4; margin-top: 0; color: var(--fg); font-weight: 500; }
+.more { margin-top: 2px; }
+.more summary { cursor: pointer; color: var(--blue-ink); font-weight: 600; font-size: 0.8125rem; list-style: none; display: inline-flex; align-items: center; gap: 4px; }
+.more summary::-webkit-details-marker { display: none; }
+.more summary::after { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+.more[open] summary::after { transform: rotate(-135deg) translateY(-1px); }
+.tips { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.tips li { display: flex; gap: 8px; align-items: flex-start; font-size: 0.8125rem; line-height: 1.4; color: var(--fg-2); }
+.tips li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 0.45em; border-radius: 50%; background: var(--blue); }
+@media (max-width: 760px) {
+  .steps { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .step { padding: 12px 12px 10px; border-radius: 16px; gap: 4px; }
+  .step h3 { font-size: 0.9375rem; }
+  .step .lead { font-size: 0.8125rem; }
+  .step .pic video { border-radius: 10px; }
 }
-.step .lead { font-size: 1.0625rem; margin-top: 0; color: var(--fg); font-weight: 500; }
-.tips { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
-.tips li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.9375rem; line-height: 1.45; color: var(--fg-2); }
-.tips li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 0.5em; border-radius: 50%; background: var(--blue); }
 
 /* A chapter's own drawing beside its words */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; margin-bottom: 48px; }
 .split .head { text-align: left; margin: 0; }
 .split .sheet { padding: clamp(16px, 2.5vw, 28px); }
 .split .step { margin: 0; }
-@media (max-width: 760px) { .split { grid-template-columns: 1fr; } .split .head { text-align: center; } }
+@media (max-width: 760px) { .split { grid-template-columns: 1fr; gap: 20px; margin-bottom: 28px; } .split .head { text-align: center; } .split .sheet img { max-height: 220px; width: auto; max-width: 100%; margin: 0 auto; } }
 
 /* Three cards across */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
