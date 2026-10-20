@@ -84,10 +84,12 @@
     function start() { if (!running) { running = true; timer = setInterval(step, 3000); } }
     function stop() { running = false; clearInterval(timer); }
     place(false);
+    // Watched on its window, not the track: the track is many screens wide,
+    // so a phone never shows a tenth of it (Jay: "they also don't rotate").
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
-      }, { threshold: 0.1 }).observe(track);
+      }, { threshold: 0 }).observe(track.parentNode);
     } else { start(); }
     window.addEventListener('resize', function () { place(false); });
     window.addEventListener('pageshow', function () { place(false); if (running) { stop(); start(); } });
