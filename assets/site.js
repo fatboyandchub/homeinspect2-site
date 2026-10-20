@@ -1,7 +1,8 @@
 // The site's only script, its own: each example picture shows its finished
-// frame, then plays once as it comes into view and ends on that same frame
-// (the app's rule: no loops). The sections rise gently. Nothing is loaded
-// from anywhere else and nothing is recorded.
+// frame, plays as it comes into view, rests two seconds on that frame and
+// plays again (Jay, 2026-10-20: "a 2 second pause after they complete and
+// then loop"), and pauses while it's off the screen. The sections rise
+// gently. Nothing is loaded from anywhere else and nothing is recorded.
 (function () {
   var root = document.documentElement;
   root.classList.add('js');
@@ -19,12 +20,68 @@
     v.preload = 'auto';
     v.src = base(v) + '.mp4';
   }
+  function resume(v) {
+    if (v.paused && !v.dataset.resting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  }
   function play(v) {
-    if (still.matches || v.dataset.played) return;
+    if (still.matches) return;
+    if (v.dataset.played) { resume(v); return; }
     v.dataset.played = '1';
     fetch(v);
-    var p = v.play();
-    if (p && p.catch) p.catch(function () {});
+    // Done: rest two seconds on the finished frame, then play again.
+    v.addEventListener('ended', function () {
+      v.dataset.resting = '1';
+      setTimeout(function () {
+        delete v.dataset.resting;
+        if (v.dataset.onScreen) { v.currentTime = 0; resume(v); }
+      }, 2000);
+    });
+    resume(v);
+  }
+  // Each picture plays while it's on the screen (a screen ahead counts) and
+  // pauses off it; a page brought back with Back, or a tab shown again,
+  // picks every visible one up (Jay: "go back, the page freezes the videos").
+  function wake() {
+    videos.forEach(function (v) { if (v.dataset.played && v.dataset.onScreen && !v.dataset.resting) resume(v); });
+  }
+  window.addEventListener('pageshow', wake);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) wake(); });
+
+  // The 3D models: the row turns one tile every 3 seconds, round and round.
+  // The first tiles are cloned onto the end, so the turn past the last one
+  // lands on their copies and the row jumps back unseen.
+  var track = document.querySelector('.models .track');
+  if (track && !still.matches) {
+    var tiles = Array.prototype.slice.call(track.children);
+    var count = tiles.length;
+    tiles.slice(0, 3).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+    var at = 0, running = false, timer = null;
+    function step() {
+      var tile = track.children[0];
+      var pitch = tile.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+      at += 1;
+      track.classList.remove('jump');
+      track.style.transform = 'translateX(' + (-at * pitch) + 'px)';
+      if (at >= count) {
+        // Past the last tile, onto the clones: once the slide ends, snap back to the start without a transition.
+        setTimeout(function () {
+          track.classList.add('jump');
+          at = 0;
+          track.style.transform = 'translateX(0)';
+          // Force the jump to take before the next animated step.
+          void track.offsetWidth;
+        }, 720);
+      }
+    }
+    function start() { if (!running) { running = true; timer = setInterval(step, 3000); } }
+    function stop() { running = false; clearInterval(timer); }
+    window.addEventListener('pageshow', function () { if (running) { stop(); start(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
+      }, { threshold: 0.1 }).observe(track);
+    } else { start(); }
+    window.addEventListener('resize', function () { track.classList.add('jump'); track.style.transform = 'translateX(0)'; at = 0; });
   }
 
   var rises = Array.prototype.slice.call(document.querySelectorAll('.rise'));
@@ -63,14 +120,17 @@
   var seen = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
-      var el = e.target;
-      el.classList.add('in');
-      var v = el.matches && el.matches('video[data-pic]') ? el : el.querySelector('video[data-pic]');
-      if (v) play(v);
-      seen.unobserve(el);
+      e.target.classList.add('in');
+      seen.unobserve(e.target);
     });
   }, { rootMargin: '0px 0px 100% 0px', threshold: 0 });
   rises.forEach(function (el) { seen.observe(el); });
-  // A picture outside a rising block still plays on its own.
-  videos.forEach(function (v) { if (!v.closest('.rise')) seen.observe(v); });
+  var screen = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { v.dataset.onScreen = '1'; play(v); }
+      else { delete v.dataset.onScreen; if (!v.paused) v.pause(); }
+    });
+  }, { rootMargin: '0px 0px 100% 0px', threshold: 0 });
+  videos.forEach(function (v) { screen.observe(v); });
 })();

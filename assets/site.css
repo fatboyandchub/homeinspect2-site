@@ -43,7 +43,7 @@ a { color: var(--blue); text-decoration: none; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
 h1 { font-size: clamp(2.6rem, 7vw, 4.75rem); letter-spacing: -0.035em; }
-h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); letter-spacing: -0.03em; }
+h2 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.03em; }
 h3 { font-size: 1.375rem; letter-spacing: -0.015em; }
 p { text-wrap: pretty; }
 .wrap {
@@ -77,7 +77,8 @@ section { padding-block: clamp(40px, 7vw, 88px); scroll-margin-top: 64px; }
 section.alt { background: var(--band); }
 .alt .step, .alt .tool, .alt .card, .alt .price { background: var(--card-on-2); }
 .head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
-.eyebrow { color: var(--blue-ink); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+/* The chapter's name over its headline, big (Jay, 2026-10-20: "the interior and exterior titles need to be bigger, the titles underneath them a little smaller"). */
+.eyebrow { color: var(--blue-ink); font-weight: 700; font-size: clamp(1.375rem, 3.2vw, 1.875rem); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; line-height: 1.1; }
 .lead { color: var(--fg-2); font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.45; margin-top: 18px; font-weight: 400; }
 
 /* The opening */
@@ -191,27 +192,31 @@ section.alt { background: var(--band); }
 .draft { background: rgba(255, 159, 10, 0.14); border: 1px solid rgba(255, 159, 10, 0.5); border-radius: 14px; padding: 12px 16px; margin: 0 0 28px; }
 mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; border-radius: 3px; }
 
-/* The 3D models, on the app's blue: three tiles side by side (Jay,
-   2026-10-20: "side by side and not under each other"); a phone swipes
-   along the row. */
-.models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 48px); box-shadow: var(--shadow); }
-.models .head { margin-bottom: 28px; }
+/* The 3D models, on the app's blue: a row of tiles that turns one tile
+   every 3 seconds, round and round (Jay, 2026-10-20: "rotate through them
+   all one per every 3 seconds … like an infinite loop"). Three show on a
+   desk, one and a bit on a phone; Reduce Motion gets a row to scroll. */
+.models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 48px) 0; box-shadow: var(--shadow); overflow: hidden; }
+.models .head { margin-bottom: 28px; padding-left: 20px; padding-right: 20px; }
 .models h2 { color: #fff; }
 .models .lead { color: rgba(255, 255, 255, 0.85); }
 .models .eyebrow { color: rgba(255, 255, 255, 0.8); }
-.models .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 24px); align-items: stretch; }
-.models figure { display: flex; flex-direction: column; min-width: 0; }
+.models .window { overflow: hidden; padding: 0 clamp(24px, 4vw, 48px); }
+.models .track { display: flex; gap: var(--gap); --gap: clamp(12px, 2vw, 24px); --cols: 3; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+.models .track.jump { transition: none; }
+.models figure { flex: none; width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); display: flex; flex-direction: column; min-width: 0; }
 .models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; }
 .models .sheet img { width: 100%; height: 100%; object-fit: contain; }
 .models figcaption { color: rgba(255, 255, 255, 0.85); font-size: 0.9375rem; margin-top: 10px; text-align: center; }
 @media (max-width: 760px) {
-  .models { padding: 20px 0 24px; }
-  .models .head, .models .row { padding-left: 20px; padding-right: 20px; }
-  .models .row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
-  .models .row::-webkit-scrollbar { display: none; }
-  .models figure { flex: none; width: 72%; scroll-snap-align: center; }
-  .models figure:last-child { margin-right: 20px; }
+  .models .window { padding: 0 20px; }
+  .models .track { --cols: 1.3; }
   .models figcaption { font-size: 0.875rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .models .window { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .models .track { transition: none; }
+  .models figure { scroll-snap-align: start; }
 }
 
 /* The foot */
