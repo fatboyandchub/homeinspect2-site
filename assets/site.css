@@ -83,6 +83,8 @@ section.alt { background: var(--band); }
 
 /* The opening */
 .hero { padding-block: clamp(48px, 8vw, 96px) 0; text-align: center; }
+/* The opening's label stays small; the big ones are the chapters' (Jay, 2026-10-20: "I don't like how this one looks"). */
+.hero .eyebrow { font-size: 0.9375rem; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 16px; }
 .hero h1 { max-width: 15ch; margin: 0 auto; }
 .hero .lead { max-width: 620px; margin: 22px auto 0; }
 .hero .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
