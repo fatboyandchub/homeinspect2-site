@@ -18,7 +18,7 @@
   function fetch(v) {
     if (v.getAttribute('src')) return;
     v.preload = 'auto';
-    v.src = base(v) + '.mp4';
+    v.src = base(v) + '.mp4' + (v.dataset.v ? '?v=' + v.dataset.v : '');
   }
   function resume(v) {
     if (v.paused && !v.dataset.resting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
