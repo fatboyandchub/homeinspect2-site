@@ -191,7 +191,7 @@ footer a { color: var(--fg-2); }
 /* Gentle motion: blocks rise as they come up, only with scripts on and
    motion allowed; everything is in place without either. */
 @media (prefers-reduced-motion: no-preference) {
-  html.js .rise { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  html.js .rise { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease-out, transform 0.3s ease-out; }
   html.js .rise.in { opacity: 1; transform: none; }
 }
 @media print { html.js .rise { opacity: 1; transform: none; } }
