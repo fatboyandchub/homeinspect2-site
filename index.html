@@ -2,39 +2,133 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Home Inspect</title>
-<style>
-  :root { --accent: #2F7CF6; --bg: #0d1117; --fg: #f0f3f6; --muted: #98a3ad; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg); color: var(--fg); line-height: 1.6; -webkit-font-smoothing: antialiased;
-  }
-  main { max-width: 720px; margin: 0 auto; padding: 96px 24px 64px; text-align: center; }
-  h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin: 20px 0 10px; }
-  .tag { color: var(--muted); font-size: 1.1rem; margin-bottom: 36px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; text-align: left; margin: 32px 0; }
-  .card { background: #161b22; border-radius: 16px; padding: 18px; }
-  .card h3 { font-size: 1rem; margin-bottom: 6px; }
-  .card p { color: var(--muted); font-size: 0.92rem; }
-  .links a { color: var(--accent); margin: 0 10px; font-size: 0.95rem; }
-  .foot { color: var(--muted); font-size: 0.85rem; margin-top: 40px; }
-</style>
+<meta name="description" content="Sketch the inside, the outside, the roof and the fence of a home on your iPhone, iPad and Mac. Rooms by LiDAR, photos, one PDF, your own iCloud.">
+<link rel="canonical" href="https://homeinspectapp.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Home Inspect">
+<meta property="og:title" content="Home Inspect">
+<meta property="og:description" content="Sketch the inside, the outside, the roof and the fence of a home on your iPhone, iPad and Mac. Rooms by LiDAR, photos, one PDF, your own iCloud.">
+<meta property="og:url" content="https://homeinspectapp.com/">
+<meta property="og:image" content="https://homeinspectapp.com/assets/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
+<header class="bar"><div class="wrap"><a class="brand" href="/"><img src="/assets/icon-64.png" alt="" width="28" height="28">Home Inspect</a><nav aria-label="Pages"><a href="/#interior" class="more">Interior</a><a href="/#exterior" class="more">Exterior</a><a href="/#roof" class="more">Roof</a><a href="/#fence" class="more">Fence</a><a href="/#photos" class="more">Photos &amp; PDF</a><a href="/#price" class="more">Price</a><a href="/support" class="pill">Support</a></nav></div></header>
 <main>
-  <h1>Home Inspect</h1>
-  <p class="tag">Sketch the inside, the outside, the roof and the fence. Keep it all in one project, on every Apple device you own.</p>
-  <div class="cards">
-    <div class="card"><h3>Interior</h3><p>Scan a room with LiDAR, tap its corners with the camera, or draw it wall by wall. Get the floor plan, a 3D model and every wall's elevation with its doors and windows.</p></div>
-    <div class="card"><h3>Exterior</h3><p>Scan each wall of the house with the camera or draw it, with its openings, and get the siding figures on a clean paper sheet.</p></div>
-    <div class="card"><h3>Roof</h3><p>Draw the roof from above, section by section, with its pitches, lettered facets and square footage.</p></div>
-    <div class="card"><h3>Fence</h3><p>Draw the fence around the home from above, with gates, and see every run face on.</p></div>
-    <div class="card"><h3>Private by design</h3><p>No account, no server of ours. Your projects live on your iPhone and in your own iCloud. Only the people you share a project with can see it.</p></div>
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">For iPhone, iPad and Mac</div>
+  <h1>Sketch the whole home.</h1>
+  <p class="lead">Scan the rooms, draw the siding, the roof and the fence, shoot the photos, and send one PDF. Every project lives in your own iCloud.</p>
+  <div class="ctas"><a class="btn dark" href="#tools">See how it works <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><span class="btn soon">Coming to the App Store</span></div>
+  <div class="board rise">
+    <div class="sheet main"><img src="/assets/sketches/floor-plan.png" alt="A home's floor plan from a LiDAR scan: every room with its area, every wall's length, the furniture" width="1800" height="1842" loading="eager" fetchpriority="high"></div>
+    <div class="sheet float left"><img src="/assets/sketches/roof.png" alt="A roof drawn from above with lettered facets" width="1536" height="1546" loading="lazy"></div>
+    <div class="sheet float right"><img src="/assets/sketches/elevation.png" alt="A wall drawn flat with its door and windows" width="1800" height="1188" loading="lazy"></div>
   </div>
-  <p class="links"><a href="/privacy">Privacy Policy</a><a href="/support">Support</a></p>
-  <p class="foot">$9.99 a month after a free first month. Made by Jason Crane.</p>
+  <div class="facts">
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Rooms by LiDAR or by camera</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Siding, roof and fence figures</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Photos and one PDF</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No account, your own iCloud</span>
+  </div>
+</div></section>
+
+<section id="tools" class="alt"><div class="wrap">
+  <div class="head rise"><div class="eyebrow">Four tools, one project</div><h2>Every drawing a job needs.</h2><p class="lead">Interior, Exterior, Roof and Fence, and the figures worked out as you draw.</p></div>
+  <div class="tools">
+    <a class="tool rise" href="#interior"><div class="sheet"><img src="/assets/sketches/room.png" alt="A room's plan with every wall's length" width="1800" height="1800" loading="lazy"></div><h3>Interior</h3><p>Scan a room, tap its corners or draw it. Floor plan, 3D model and every wall flat.</p><span class="go">Rooms →</span></a>
+    <a class="tool rise" href="#exterior"><div class="sheet"><img src="/assets/sketches/siding.png" alt="A gable wall with a window, every length marked" width="1800" height="839" loading="lazy"></div><h3>Exterior</h3><p>Scan a wall with the camera or sketch it. Net siding, starter, rake and corners.</p><span class="go">Walls →</span></a>
+    <a class="tool rise" href="#roof"><div class="sheet"><img src="/assets/sketches/roof.png" alt="A roof from above, its facets lettered" width="1536" height="1546" loading="lazy"></div><h3>Roof</h3><p>Shapes or lines, lettered facets, a pitch each, and the square feet follow.</p><span class="go">Roofs →</span></a>
+    <a class="tool rise" href="#fence"><div class="sheet"><img src="/assets/sketches/fence-plan.png" alt="A fence drawn around a house from above, with a gate" width="1314" height="1452" loading="lazy"></div><h3>Fence</h3><p>Run by run around the house, gates and all, then every run face-on.</p><span class="go">Fences →</span></a>
+  </div>
+</div></section>
+
+<section id="start"><div class="wrap">
+  <div class="split rise"><div class="head"><div class="eyebrow">Projects</div><h2>One project for each home.</h2><p class="lead">Name it, type the address, and the home shows from above. Interior, Exterior, Roof and Fence live inside it, with a camera on every page.</p></div>
+  <article class="step rise"><h3>Start a Project</h3><div class="pic"><video muted playsinline preload="none" data-pic="project" aria-label="Start a Project, as the app shows it"></video></div><p class="lead">One for each home: everything you draw and shoot lives in it.</p><ul class="tips"><li>Tap +, name the project and type the address. Pick it from the list and the home shows from above.</li><li>Inside: Interior, Exterior, Roof and Fence, a camera on every page, and one PDF of it all.</li><li>A detached garage or shed? Add Structure keeps its rooms, walls, roof and fence together.</li></ul></article></div>
+</div></section>
+
+<section id="interior" class=""><div class="wrap">
+<div class="split rise"><div class="head"><div class="eyebrow">Interior</div><h2>Rooms, measured three ways.</h2><p class="lead">Walk a room with the LiDAR scanner (iPhone Pro models), tap its corners with the camera on any iPhone, or draw the walls yourself. Either way you get the floor plan, a 3D model and every wall drawn flat with its doors and windows.</p></div><div class="sheet"><img src="/assets/sketches/room.png" alt="A room's plan: every wall's length, the doors and windows, the area" width="1800" height="1800" loading="lazy"></div></div>
+<div class="steps">
+<article class="step rise wide"><div class="n">Interior · 1 of 8</div><h3>Scan a Room</h3><div class="pic"><video muted playsinline preload="none" data-pic="roomScan" aria-label="Scan a Room, as the app shows it"></video></div><p class="lead">Open Interior, tap + and pick the room. Then Detect Walls.</p><ul class="tips"><li>Lights on, doors closed.</li><li>Hold the iPhone up at chest height and walk the whole room slowly: every corner, floor to ceiling.</li><li>Tap ✓ when you've walked it all. Or pick Sketch and draw the walls yourself.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 2 of 8</div><h3>Check It in 3D</h3><div class="pic"><video muted playsinline preload="none" data-pic="roomReview" aria-label="Check It in 3D, as the app shows it"></video></div><p class="lead">Before you save, see the scan as a 3D model or a plan.</p><ul class="tips"><li>Two fingers turn it, pinch to zoom. 2D shows the plan.</li><li>Dims shows every wall, door and window, and the height.</li><li>Keep the furniture or leave it out, then tap ✓ to save.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 3 of 8</div><h3>Mark the Room's Corners</h3><div class="pic"><video muted playsinline preload="none" data-pic="cornerScan" aria-label="Mark the Room's Corners, as the app shows it"></video></div><p class="lead">No LiDAR, or a room the scan won't read? Pick Detect Corners: it works on any iPhone.</p><ul class="tips"><li>Point at the floor and move the iPhone slowly until the grid shows.</li><li>Aim at each corner where the walls meet the floor and tap the screen. Back on the first corner closes the room.</li><li>Then point up at the top of a wall and tap for the height, and mark each door and window by two opposite corners.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 4 of 8</div><h3>Add the Next Room</h3><div class="pic"><video muted playsinline preload="none" data-pic="addRoom" aria-label="Add the Next Room, as the app shows it"></video></div><p class="lead">Tap Add Room, pick the room, then tap the door you walk through.</p><ul class="tips"><li>It lands door to door, sharing the wall, so the floor plan builds as you go.</li><li>Rooms scanned on their own? On the Floor Plan, pick a room, tap Connect, then the same door in each.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 5 of 8</div><h3>Two Rooms in One Scan? Split</h3><div class="pic"><video muted playsinline preload="none" data-pic="split" aria-label="Two Rooms in One Scan? Split, as the app shows it"></video></div><p class="lead">For a nook or a second room that came in with the scan.</p><ul class="tips"><li>When the app says Looks Like 2 Rooms, tap Split and name each part. Each gets its own area.</li><li>Already saved as one? The room's page says it too. Tap Split there.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 6 of 8</div><h3>Tap a Wall</h3><div class="pic"><video muted playsinline preload="none" data-pic="roomViews" aria-label="Tap a Wall, as the app shows it"></video></div><p class="lead">On the room's plan, tap a wall to see it flat with its doors and windows.</p><ul class="tips"><li>Tap a wall to see it flat, with its size and net square feet.</li><li>Edit, then Add, puts in a Door, Window or Opening. Drag it into place; tap a size to type it.</li><li>In 2D, tap any length to type the real figure.</li></ul></article>
+<article class="step rise"><div class="n">Interior · 7 of 8</div><h3>Every Figure, Checked</h3><div class="pic tall"><video muted playsinline preload="none" data-pic="roomFigures" aria-label="Every Figure, Checked, as the app shows it"></video></div><p class="lead">Each room's page adds it all up.</p><ul class="tips"><li>Floor, ceiling, walls net and gross, perimeter and ceiling height, with the doors and windows counted.</li><li>Share prints a clean floor plan with every wall length.</li></ul></article>
+<article class="step rise wide"><div class="n">Interior · 8 of 8</div><h3>The Whole Home's Floor Plan</h3><div class="pic"><video muted playsinline preload="none" data-pic="homePlan" aria-label="The Whole Home's Floor Plan, as the app shows it"></video></div><p class="lead">Interior, then Floor Plan: every room together, with its area.</p><ul class="tips"><li>Rooms scanned on their own? Tap a room, then Connect: tap the blue circle on its door, then the circle on the other room's door, and they join wall to wall.</li><li>Long press a room to move it; it snaps to the one beside it. Rotate turns it. + Floor adds the basement or upstairs.</li></ul></article>
+</div></div></section>
+<section id="exterior" class="alt"><div class="wrap">
+<div class="split rise"><div class="head"><div class="eyebrow">Exterior</div><h2>Every wall of the house, with its siding figures.</h2><p class="lead">Scan a wall with the camera or sketch it from a shape, add the doors and windows, and the net siding comes out on a clean sheet with the starter, rake and corner lengths.</p></div><div class="sheet"><img src="/assets/sketches/siding.png" alt="A gable wall with its window, every length marked" width="1800" height="839" loading="lazy"></div></div>
+<div class="steps">
+<article class="step rise wide"><div class="n">Exterior · 1 of 4</div><h3>Scan a Wall with the Camera</h3><div class="pic"><video muted playsinline preload="none" data-pic="wallScan" aria-label="Scan a Wall with the Camera, as the app shows it"></video></div><p class="lead">Open Exterior, tap + and pick the side. Then Scan with Camera.</p><ul class="tips"><li>Point the square at the wall and tap the shutter.</li><li>Put the crosshair on each corner of the wall and tap, all the way round to the first.</li></ul></article>
+<article class="step rise"><div class="n">Exterior · 2 of 4</div><h3>Then the Doors and Windows</h3><div class="pic"><video muted playsinline preload="none" data-pic="wallOpenings" aria-label="Then the Doors and Windows, as the app shows it"></video></div><p class="lead">Still in the camera: two corners each.</p><ul class="tips"><li>Pick Door, Window or Garage Door and tap two opposite corners of each.</li><li>Tap ✓ and the wall opens in the editor with every opening in place.</li></ul></article>
+<article class="step rise"><div class="n">Exterior · 3 of 4</div><h3>Or Sketch It by Hand</h3><div class="pic"><video muted playsinline preload="none" data-pic="wallSketch" aria-label="Or Sketch It by Hand, as the app shows it"></video></div><p class="lead">Sketch by Hand, then Shape: Gable, Shed, Gambrel, Split Level and more.</p><ul class="tips"><li>Drag the corners into place, or tap any figure and type the real size.</li><li>Tap + on a line to add a corner. Piece adds a separate section.</li></ul></article>
+<article class="step rise wide"><div class="n">Exterior · 4 of 4</div><h3>Everything on the Wall</h3><div class="pic"><video muted playsinline preload="none" data-pic="wallAdd" aria-label="Everything on the Wall, as the app shows it"></video></div><p class="lead">Add puts on a Window, Door, Garage Door, Gable Vent, Shutter, Light Fixture or Exhaust Vent.</p><ul class="tips"><li>Type picks the kind: Double Hung, Casement, Bay, French Door, Sliding Patio and more.</li><li>Style makes it Arch Top, Half Round, Round or Octagon and takes off its true area.</li><li>The bar shows the net siding. Export makes the sheet with the starter, rake and corner lengths.</li></ul></article>
+</div></div></section>
+<section id="roof" class=""><div class="wrap">
+<div class="split rise"><div class="head"><div class="eyebrow">Roof</div><h2>The roof from above.</h2><p class="lead">Drop in shapes or trace the lines, letter the facets, set each pitch, and the square feet follow. Map puts the real home under your drawing.</p></div><div class="sheet"><img src="/assets/sketches/roof.png" alt="A roof from above, nine lettered facets" width="1536" height="1546" loading="lazy"></div></div>
+<div class="steps">
+<article class="step rise wide"><div class="n">Roof · 1 of 5</div><h3>Draw the Roof from Shapes</h3><div class="pic"><video muted playsinline preload="none" data-pic="roofShapes" aria-label="Draw the Roof from Shapes, as the app shows it"></video></div><p class="lead">Open Roof, tap + and Draw a Roof. Then Shape.</p><ul class="tips"><li>Tap a shape to add it, drag it into place, pull a side to size it.</li><li>Style sets Hip, Gable, Dutch or Clipped ends, Gambrel, Mansard or Flat, and the material.</li><li>Under Tools, Letters: tap a facet to set its letter and pitch, join it or split it.</li></ul></article>
+<article class="step rise"><div class="n">Roof · 2 of 5</div><h3>Or Draw It with Lines</h3><div class="pic"><video muted playsinline preload="none" data-pic="roofLines" aria-label="Or Draw It with Lines, as the app shows it"></video></div><p class="lead">Shape, then Draw Lines: tap where each line starts and ends.</p><ul class="tips"><li>Trace the roof's edges, ridges, hips and valleys line by line.</li><li>Under Tools, Letters: tap a shape your lines close to letter it, or Letter All does every one.</li><li>Tap a lettered facet to set its pitch, and the roof's square feet follow.</li></ul></article>
+<article class="step rise"><div class="n">Roof · 3 of 5</div><h3>Mark What's on the Roof</h3><div class="pic"><video muted playsinline preload="none" data-pic="roofMarks" aria-label="Mark What's on the Roof, as the app shows it"></video></div><p class="lead">Tap Mark, pick what it is, then tap the plan.</p><ul class="tips"><li>Test squares, vents, pipe jacks, chimneys, skylights, satellites, solar panels and tarps.</li><li>Note puts your own words anywhere on the plan.</li></ul></article>
+<article class="step rise"><div class="n">Roof · 4 of 5</div><h3>Tap FRONT to Move It</h3><div class="pic"><video muted playsinline preload="none" data-pic="roofFront" aria-label="Tap FRONT to Move It, as the app shows it"></video></div><p class="lead">It moves to the next side, clockwise, until it faces the street.</p><ul class="tips"><li>The facets take their names from it: Front Slope, Right Slope and so on.</li><li>Tap the compass to turn north a quarter.</li></ul></article>
+<article class="step rise"><div class="n">Roof · 5 of 5</div><h3>Map, Measure and Pitch</h3><div class="pic"><video muted playsinline preload="none" data-pic="roofMap" aria-label="Map, Measure and Pitch, as the app shows it"></video></div><p class="lead">Trace it true, then let the app do the math.</p><ul class="tips"><li>With the address in, Map puts the home from above under your drawing. Line Up Map matches them.</li><li>Under Tools, Measure gives the area from each facet's pitch. Lengths shows the hips, ridges and valleys.</li></ul></article>
+</div></div></section>
+<section id="fence" class="alt"><div class="wrap">
+<div class="split rise"><div class="head"><div class="eyebrow">Fence</div><h2>The fence, run by run.</h2><p class="lead">Lay it out around the house, add the gates, pick the style and height, and see every run face-on. Mark potential damage and the totals add it up.</p></div><div class="sheet"><img src="/assets/sketches/fence-plan.png" alt="A fence drawn around the house from above, with its gate" width="1314" height="1452" loading="lazy"></div></div>
+<div class="steps">
+<article class="step rise wide"><div class="n">Fence · 1 of 4</div><h3>Lay Out the Fence</h3><div class="pic"><video muted playsinline preload="none" data-pic="fenceRuns" aria-label="Lay Out the Fence, as the app shows it"></video></div><p class="lead">Open Fence and tap +. The first run starts behind the house.</p><ul class="tips"><li>Drag the corners into place. Tap + on a run for a corner, or an end and then Run to keep going.</li><li>The house underneath is your roof drawing, or a Plain House you size and turn.</li><li>Line adds a separate stretch of fence.</li></ul></article>
+<article class="step rise"><div class="n">Fence · 2 of 4</div><h3>Add the Gates</h3><div class="pic"><video muted playsinline preload="none" data-pic="fenceGate" aria-label="Add the Gates, as the app shows it"></video></div><p class="lead">Tap a run, then Gate.</p><ul class="tips"><li>Width sets its size. Style swings it In or Out, Single or Double.</li><li>The totals list the gates: 1 gate (4').</li></ul></article>
+<article class="step rise"><div class="n">Fence · 3 of 4</div><h3>Style and Height</h3><div class="pic"><video muted playsinline preload="none" data-pic="fenceStyle" aria-label="Style and Height, as the app shows it"></video></div><p class="lead">Style: Privacy, Board on Board, Shadowbox, Picket, Split Rail, Chain Link, Vinyl or Metal.</p><ul class="tips"><li>Height 4', 5', 6' or 8', or type any height.</li><li>Elevation draws every run face-on: posts, rails, boards and gates.</li></ul></article>
+<article class="step rise wide"><div class="n">Fence · 4 of 4</div><h3>Potential Damage, Run by Run</h3><div class="pic"><video muted playsinline preload="none" data-pic="fenceDamage" aria-label="Potential Damage, Run by Run, as the app shows it"></video></div><p class="lead">Tap a run, then Damage: Spatter or Wind.</p><ul class="tips"><li>Mark the whole run or part of it, which side, and the posts in the damaged stretch.</li><li>The bar adds it up: LF, SF (LF × height) and the gates.</li><li>The PDF's plan and elevation show every damaged run: orange for Spatter, blue for Wind.</li></ul></article>
+</div></div></section>
+<section id="photos" class=""><div class="wrap">
+<div class="ink rise">
+    <div class="head"><div class="eyebrow">Photos &amp; PDF</div><h2>Photos where they belong, and one PDF of it all.</h2><p class="lead">Every page has a camera, and every photo lands under its room, wall, roof or run. Then one PDF: a cover page with the summary, a sheet for each room, wall, roof and fence, and the photos two to a page under their captions. Pick the sheets, set the order, share it.</p></div>
+    <div class="fan">
+      <div class="sheet"><img src="/assets/sheets/floor-plan.jpg" alt="The floor plan sheet" width="1600" height="2065" loading="lazy"></div>
+      <div class="sheet"><img src="/assets/sheets/siding-front.jpg" alt="The siding sheet" width="1600" height="1200" loading="lazy"></div>
+      <div class="sheet"><img src="/assets/sheets/roof.jpg" alt="The roof sheet" width="1600" height="1200" loading="lazy"></div>
+    </div>
+    <div class="pages"><span><b>Cover</b> name, address, date and totals</span><span><b>Rooms</b> plan and every wall</span><span><b>Walls</b> siding figures</span><span><b>Roof</b> facets and pitches</span><span><b>Fence</b> plan and elevation</span><span><b>Photos</b> captioned</span></div>
+  </div>
+<div class="steps">
+<article class="step rise wide"><div class="n">Photos &amp; PDF · 1 of 2</div><h3>Photos for Every Sketch</h3><div class="pic"><video muted playsinline preload="none" data-pic="photos" aria-label="Photos for Every Sketch, as the app shows it"></video></div><p class="lead">Tap the camera at the top of any page.</p><ul class="tips"><li>Take as many as you need, then tap Done to caption them.</li><li>Each tool's camera files them under that room, wall, roof or run.</li><li>Open a photo and tap the pencil to crop, turn or draw on it.</li></ul></article>
+<article class="step rise wide"><div class="n">Photos &amp; PDF · 2 of 2</div><h3>One PDF</h3><div class="pic"><video muted playsinline preload="none" data-pic="pdf" aria-label="One PDF, as the app shows it"></video></div><p class="lead">On a project, tap the page button, then Create PDF.</p><ul class="tips"><li>Tap a sheet's circle to leave it out. Reorder sets the order.</li><li>A cover page with the summary, then a sheet for each room, wall, roof and fence.</li><li>Share it from the preview.</li></ul></article>
+</div></div></section>
+
+
+<section id="private" class="alt"><div class="wrap">
+  <div class="head rise"><div class="eyebrow">Private by design</div><h2>Your work stays yours.</h2><p class="lead">No account to make and no server of ours. Only you and the people you share a project with can open it, never us.</p></div>
+  <div class="cards">
+    <div class="card rise"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 6.9 9.2 4.4 4.4 0 0 0 7 18z"/></svg><h3>Your own iCloud</h3><p>Projects live on your iPhone and in your own iCloud, so they show up on your iPad and Mac and come back if you reinstall. Turn the backup off in Settings and they stay on the phone alone.</p></div>
+    <div class="card rise"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A4.6 4.6 0 0 1 21.5 19"/></svg><h3>Groups</h3><p>Start a group and invite your crew. A project you share stays in your own iCloud; everyone in the group can open it and work on it. Leave, and your projects come back with you.</p></div>
+    <div class="card rise"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Nothing to track</h3><p>No analytics, no advertising, no tracking of any kind. Photos lose their location the moment they're added. The <a href="/privacy">privacy policy</a> says it all in plain words.</p></div>
+  </div>
+</div></section>
+
+<section id="price"><div class="wrap">
+  <div class="price rise">
+    <div class="eyebrow">One price</div>
+    <div class="big">$9.99<small> a month</small></div>
+    <p>The first month is free. Apple handles the subscription; change or cancel it under Subscriptions in your Apple Account, any time.</p>
+    <p>Interior, Exterior, Roof, Fence, photos, groups and the PDF, on your iPhone, iPad and Mac.</p>
+    <span class="btn soon">Coming to the App Store</span>
+  </div>
+</div></section>
 </main>
+
+<footer><div class="wrap"><div>Home Inspect is made by Jason Crane. © 2026.</div><nav aria-label="More"><a href="/support">Support</a><a href="/privacy">Privacy Policy</a><a href="mailto:support@homeinspectapp.com">support@homeinspectapp.com</a></nav></div></footer>
+<script src="/assets/site.js"></script>
 </body>
 </html>
