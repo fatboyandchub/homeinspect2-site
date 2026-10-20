@@ -64,7 +64,9 @@
       var tile = track.children[0], win = track.parentNode;
       var width = tile.getBoundingClientRect().width;
       var pitch = width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
-      var x = (win.clientWidth - width) / 2 - at * pitch;
+      var ws = getComputedStyle(win);
+      var inner = win.clientWidth - parseFloat(ws.paddingLeft || 0) - parseFloat(ws.paddingRight || 0);
+      var x = (inner - width) / 2 - at * pitch;
       track.classList.toggle('jump', !animated);
       track.style.transform = 'translateX(' + x + 'px)';
       if (!animated) void track.offsetWidth;
