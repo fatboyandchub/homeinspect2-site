@@ -50,49 +50,69 @@
   // The 3D models: the row turns one tile every 2 seconds, round and round,
   // the current tile in the middle with its neighbours showing either side
   // (Jay, 2026-10-20: "start in the middle so that there's models on the
-  // left and right, feeling like an endless loop"). The last tiles are
-  // cloned in front and the first ones behind, so the turn past the last
-  // one lands on a copy and the row jumps back unseen.
+  // left and right, feeling like an endless loop"). Smooth on a phone (Jay:
+  // "sometimes has a weird stutter"): no copies to jump back from — once a
+  // turn has ended, the tile that left on the left goes round to the right
+  // end and the row steps back under it, so nothing on the screen moves or
+  // draws again; each tile is a layer of its own (site.css), every picture
+  // is decoded before the first turn, and each turn starts once the last
+  // has ended, never on a timer that a busy moment could cut short.
   var track = document.querySelector('.models .track');
-  if (track && !still.matches) {
-    var tiles = Array.prototype.slice.call(track.children);
-    var count = tiles.length, pad = 3;
-    tiles.slice(-pad).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.insertBefore(c, track.firstChild); });
-    tiles.slice(0, pad).forEach(function (t) { var c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-    var at = pad, running = false, timer = null, jumping = false;
-    function place(animated) {
-      var tile = track.children[0], win = track.parentNode;
+  if (track && !still.matches && track.children.length > 4) {
+    var count = track.children.length, mid = Math.floor((count - 1) / 2);
+    // The first tile in the middle, the last ones to its left.
+    for (var k = 0; k < mid; k++) track.insertBefore(track.lastElementChild, track.firstElementChild);
+    var running = false, turning = false, shown = false, timer = null, safety = null, base = 0, pitch = 0;
+    function measure() {
+      var tile = track.children[0], win = track.parentNode, ws = getComputedStyle(win);
       var width = tile.getBoundingClientRect().width;
-      var pitch = width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
-      var ws = getComputedStyle(win);
-      var inner = win.clientWidth - parseFloat(ws.paddingLeft || 0) - parseFloat(ws.paddingRight || 0);
-      var x = (inner - width) / 2 - at * pitch;
+      pitch = width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+      base = (win.clientWidth - parseFloat(ws.paddingLeft || 0) - parseFloat(ws.paddingRight || 0) - width) / 2 - mid * pitch;
+    }
+    function set(x, animated) {
       track.classList.toggle('jump', !animated);
-      track.style.transform = 'translateX(' + x + 'px)';
+      track.style.transform = 'translate3d(' + x + 'px, 0, 0)';
       if (!animated) void track.offsetWidth;
     }
-    function step() {
-      if (jumping) return;
-      at += 1;
-      place(true);
-      if (at >= pad + count) {
-        // On the clone of the first tile: once the slide ends, snap back to the real one without a transition.
-        jumping = true;
-        setTimeout(function () { at -= count; place(false); jumping = false; }, 720);
-      }
+    function rest() { clearTimeout(timer); if (running) timer = setTimeout(turn, 1300); }
+    function turn() {
+      if (!running || turning) return;
+      turning = true;
+      // Begun as a frame is drawn, so a busy moment can't start it part-way through.
+      requestAnimationFrame(function () {
+        set(base - pitch, true);
+        // Should the turn never report its end (a hidden tab), it lands anyway.
+        safety = setTimeout(landed, 1200);
+      });
     }
-    function start() { if (!running) { running = true; timer = setInterval(step, 2000); } }
-    function stop() { running = false; clearInterval(timer); }
-    place(false);
-    // Watched on its window, not the track: the track is many screens wide,
-    // so a phone never shows a tenth of it (Jay: "they also don't rotate").
+    function landed() {
+      if (!turning) return;
+      turning = false;
+      clearTimeout(safety);
+      track.appendChild(track.firstElementChild);
+      set(base, false);
+      rest();
+    }
+    track.addEventListener('transitionend', function (e) { if (e.target === track) landed(); });
+    function start() { if (!running) { running = true; rest(); } }
+    function stop() { running = false; clearTimeout(timer); }
+    measure();
+    set(base, false);
+    var ready = Promise.all(Array.prototype.map.call(track.querySelectorAll('img'), function (img) {
+      return img.decode ? img.decode().catch(function () {}) : null;
+    }));
+    // Watched on its window, not the track: the track is screens wide, so a
+    // phone never shows a tenth of it (Jay: "they also don't rotate").
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
+        entries.forEach(function (e) {
+          shown = e.isIntersecting;
+          if (shown) ready.then(function () { if (shown) start(); }); else stop();
+        });
       }, { threshold: 0 }).observe(track.parentNode);
-    } else { start(); }
-    window.addEventListener('resize', function () { place(false); });
-    window.addEventListener('pageshow', function () { place(false); if (running) { stop(); start(); } });
+    } else { ready.then(start); }
+    window.addEventListener('resize', function () { measure(); if (!turning) set(base, false); });
+    window.addEventListener('pageshow', function () { measure(); if (!turning) set(base, false); if (running) { stop(); start(); } });
   }
 
   var rises = Array.prototype.slice.call(document.querySelectorAll('.rise'));
