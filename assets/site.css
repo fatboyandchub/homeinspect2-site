@@ -113,6 +113,7 @@ section.alt { background: var(--band); }
 
 /* The four tools, as cards with their drawings */
 .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px; }
+@media (max-width: 760px) { .tools { grid-template-columns: 1fr 1fr; gap: 10px; } .tool { padding: 12px 12px 14px; border-radius: 16px; } .tool h3 { font-size: 1rem; } .tool p { font-size: 0.8125rem; } .tool .sheet { padding: 8px; } }
 .tool { background: var(--card); border-radius: 24px; padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--fg); }
 @media (hover: hover) { .tool:hover { text-decoration: none; } }
 .tool .sheet { padding: 12px; border-radius: 14px; box-shadow: var(--shadow-soft); margin-bottom: 10px; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -122,8 +123,10 @@ section.alt { background: var(--band); }
 .tool .go { color: var(--blue-ink); font-weight: 600; font-size: 0.9375rem; margin-top: 4px; }
 
 /* The steps, like the app's How to Use pages: compact, three to a row on a
-   desk (Jay, 2026-10-20: "too much to scroll down … stack more in each
-   row"), one row to swipe on a phone; the tips fold under each card. */
+   desk, two on a phone (Jay, 2026-10-20: "too much to scroll down … stack
+   more in each row"; the phone's swipe rows went back to the grid the same
+   evening: "go back to the 4 tile look so we can see them all"); the tips
+   fold under each card. */
 .steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
 .step { background: var(--card); border-radius: 20px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .step .n { color: var(--blue-ink); font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -140,26 +143,12 @@ section.alt { background: var(--band); }
 .tips { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .tips li { display: flex; gap: 8px; align-items: flex-start; font-size: 0.8125rem; line-height: 1.4; color: var(--fg-2); }
 .tips li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 0.45em; border-radius: 50%; background: var(--blue); }
-/* On a phone the four tools and each chapter's steps are one row to swipe
-   through, each card most of the screen wide with the next one peeking in,
-   so the drawings in them read (Jay, 2026-10-20: "the sketches inside are
-   small and hard to see"; two to a row made them a third of the app's
-   size) and the page still doesn't stack them down. */
 @media (max-width: 760px) {
-  .steps, .tools {
-    display: flex; gap: 12px;
-    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
-    margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
-    margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
-    padding: 2px max(20px, env(safe-area-inset-right, 0px)) 8px max(20px, env(safe-area-inset-left, 0px));
-    scroll-padding-left: max(20px, env(safe-area-inset-left, 0px));
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
-  }
-  .steps::-webkit-scrollbar, .tools::-webkit-scrollbar { display: none; }
-  .steps .step, .tools .tool { flex: none; width: 86%; scroll-snap-align: start; }
-  .steps .step { padding: 14px 14px 12px; border-radius: 18px; }
-  .tools .tool { padding: 16px 16px 18px; border-radius: 20px; }
-  html.js .steps .rise, html.js .tools .rise { opacity: 1; transform: none; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .step { padding: 12px 12px 10px; border-radius: 16px; gap: 4px; }
+  .step h3 { font-size: 0.9375rem; }
+  .step .lead { font-size: 0.8125rem; }
+  .step .pic video { border-radius: 10px; }
 }
 
 /* A chapter's own drawing beside its words */
