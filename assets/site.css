@@ -70,6 +70,8 @@ p { text-wrap: pretty; }
 @media (hover: hover) { .bar nav a:hover { text-decoration: none; color: var(--fg); } .bar nav .pill:hover { color: #fff; } }
 .bar nav .pill { background: var(--blue); color: #fff; padding: 8px 14px; border-radius: 999px; font-weight: 600; }
 @media (max-width: 760px) { .bar nav .more { display: none; } }
+/* The full name (Home Inspect: Scan & Sketch) beside Support on a phone, down to 375 pt wide. */
+@media (max-width: 440px) { .bar .wrap { gap: 10px; } .brand { font-size: 0.875rem; gap: 8px; white-space: nowrap; } }
 
 /* Sections */
 section { padding-block: clamp(40px, 7vw, 88px); scroll-margin-top: 64px; }
