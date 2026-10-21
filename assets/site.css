@@ -215,7 +215,9 @@ mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; bor
    on a desk, one and a bit on a phone; Reduce Motion gets a row to scroll.
    No captions, and the tiles stand a little taller in their place; no
    shadow, which the window clipped into a line under the row (Jay: "remove
-   the text underneath and there's a small line remove it"). */
+   the text underneath and there's a small line remove it"). Each picture
+   is already framed on its own white 9:10 tile (tools/site-models.sh), so
+   it fills the tile edge to edge. */
 .models { background: var(--blue-deep); color: #fff; border-radius: var(--radius); padding: clamp(24px, 4vw, 48px) 0; box-shadow: var(--shadow); overflow: hidden; }
 .models .head { margin-bottom: 28px; padding-left: 20px; padding-right: 20px; }
 .models h2 { color: #fff; }
@@ -225,8 +227,8 @@ mark { background: rgba(255, 214, 10, 0.55); color: inherit; padding: 0 3px; bor
 .models .track { display: flex; gap: var(--gap); --gap: clamp(12px, 2vw, 24px); --cols: 3.4; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
 .models .track.jump { transition: none; }
 .models figure { flex: none; width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); display: flex; flex-direction: column; min-width: 0; }
-.models .sheet { flex: 1; padding: 14px; border-radius: 16px; display: flex; align-items: center; justify-content: center; aspect-ratio: 9 / 10; overflow: hidden; box-shadow: none; }
-.models .sheet img { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; object-position: center; margin: auto; }
+.models .sheet { flex: 1; padding: 0; border-radius: 16px; aspect-ratio: 9 / 10; overflow: hidden; box-shadow: none; }
+.models .sheet img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 760px) {
   .models .window { padding: 0 20px; }
   .models .track { --cols: 1.4; }
