@@ -250,3 +250,19 @@ footer a { color: var(--fg-2); }
 /* The page for a wrong address */
 .lost { text-align: center; padding-block: 96px; }
 .lost p { color: var(--fg-2); margin: 14px 0 28px; }
+
+/* The price card's second plan. */
+.price .or { font-weight: 600; color: rgba(255, 255, 255, 0.92); margin: -6px 0 14px; font-size: 1.125rem; }
+
+/* The App Store pictures as one long strip, drifting by (two copies make the loop seamless); a plain
+   scroll row when the person prefers reduced motion. */
+.strip-window { overflow: hidden; margin-top: 8px; }
+.strip { display: flex; width: max-content; gap: 0; animation: strip-pan 90s linear infinite; will-change: transform; }
+.strip img { display: block; height: clamp(360px, 46vw, 560px); width: auto; flex: none; }
+.strip-window:hover .strip { animation-play-state: paused; }
+@keyframes strip-pan { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .strip-window { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .strip { animation: none; }
+  .strip img[aria-hidden] { display: none; }
+}
